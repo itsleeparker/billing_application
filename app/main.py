@@ -2,10 +2,14 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
+from fastapi.responses import JSONResponse
 import uvicorn
 import os
 from routers import users
+from postgres import model as models
+from postgres.database import getDb , engine
 
+models.Base.metadata
 
 app:FastAPI = FastAPI()
 DIR = os.path.dirname(__file__)
@@ -25,9 +29,15 @@ app.add_middleware(
 ##################################SET UP THE STATIC ROUTING FOR THE APPLICATION############################
 app.mount("/" , app=StaticFiles(directory=ABS_PATH_STATIC , html=True) , name="static")
 
+@app.exception_handler(Exception)
+def apiException(request , err):
+    err_message = f"Failed to execute {request.method} on {request.url}"
+    return JSONResponse(content={"message" : err_message , "Details" : f"{err}"}  , status_code=400)
+    
 ######################## Set Up all the dedicated root routes to the application ################################
 #Home Router here 
 app.include_router(users.router)
+
 
 
 #ADD basic Routing 
