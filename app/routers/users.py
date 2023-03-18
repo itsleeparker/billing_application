@@ -37,6 +37,7 @@ async def createUser(req:schema.UserCreate  , db:Session = Depends(getDb)):
         raise HTTPException(status_code=400  ,detail="User Already Exisit !")
     return await UserRepo.createUser(db=db , user=req)
 
+
 @router.post("/get-by-phone" , response_model=schema.User)
 async def get_by_phone(req:int     , db:Session = Depends(getDb)):
     try:

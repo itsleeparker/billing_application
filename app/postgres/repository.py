@@ -5,6 +5,7 @@ from . import model , schema
 
 class UserRepo():
     async def createUser(db:Session , user:schema.UserCreate):
+        print("This was called")
         db_user = model.User(
             name=user.name,
             email=user.email  , 
@@ -13,6 +14,7 @@ class UserRepo():
         db.add(instance=db_user)
         db.commit()
         db.refresh(instance=db_user)
+        print(db_user)
         return db_user
     
     async def fetch_by_id(db:Session , _id:str)->Any:

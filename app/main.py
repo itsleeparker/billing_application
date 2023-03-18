@@ -5,13 +5,18 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.responses import JSONResponse
 import uvicorn
 import os
-from routers import users
+from routers import users , bills
 from postgres import model as models
-from postgres.database import getDb , engine
+from postgres.database import engine
 
-models.Base.metadata
-
+#Set the app
 app:FastAPI = FastAPI()
+
+#Set The DB Connection
+models.Base.metadata.create_all(bind=engine)
+
+
+
 DIR = os.path.dirname(__file__)
 ABS_PATH_STATIC = os.path.join(DIR  , "static/")
 #########################SET UP ALL THE MIDDLEWARE REQUIRED FOR THE APPLICATION###########################
@@ -26,18 +31,18 @@ app.add_middleware(
 )
 
 
-##################################SET UP THE STATIC ROUTING FOR THE APPLICATION############################
-app.mount("/" , app=StaticFiles(directory=ABS_PATH_STATIC , html=True) , name="static")
+# ##################################SET UP THE STATIC ROUTING FOR THE APPLICATION############################
+app.mount("/home" , app=StaticFiles(directory=ABS_PATH_STATIC , html=True) , name="static")
 
-@app.exception_handler(Exception)
-def apiException(request , err):
-    err_message = f"Failed to execute {request.method} on {request.url}"
-    return JSONResponse(content={"message" : err_message , "Details" : f"{err}"}  , status_code=400)
+# @app.exception_handler(Exception)
+# def apiException(request , err):
+#     err_message = f"Failed to execute {request.method} on {request.url}"
+#     return JSONResponse(content={"message" : err_message , "Details" : f"{err}"}  , status_code=400)
     
-######################## Set Up all the dedicated root routes to the application ################################
-#Home Router here 
+# ######################## Set Up all the dedicated root routes to the application ################################
+# #Home Router here 
+app.include_router(bills.router)
 app.include_router(users.router)
-
 
 
 #ADD basic Routing 

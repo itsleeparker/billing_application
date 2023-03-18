@@ -2,17 +2,17 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
-DATA_BASE_URL:str = "postgresql://posgres:posgres@postgresserver/billing_application"
+SQLALCHEMY_DATABASE_URL = 'postgresql://postgres:Iloveanime1@localhost:5432/billing_application'
 
 #Create engine for the Postgres SQL 
 engine  = create_engine(
-    url=DATA_BASE_URL , echo=True   
+    url=SQLALCHEMY_DATABASE_URL , echo=True   
 )
 
 #Create a session instance for each DB connection
 SessionLocal = sessionmaker(bind=engine  ,autocommit=False   ,autoflush=False)
 
-#The Base for ORM models 
+#The Base for ORM models    
 Base  = declarative_base()
 
 
