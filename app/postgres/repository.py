@@ -9,7 +9,8 @@ class UserRepo():
         db_user = model.User(
             name=user.name,
             email=user.email  , 
-            phone_no = user.phone_no
+            phone_no = user.phone_no ,
+            password = user.password
         )
         db.add(instance=db_user)
         db.commit()
@@ -22,7 +23,8 @@ class UserRepo():
     
     async def fetch_by_phone(db:Session , phone_number:int)->Any:
         return db.query(model.User).filter(model.User.phone_no == phone_number).first()
-    
+
+
     async def fetchAll(db:Session , skip:int , limit:int)->Any:
         res  = db.query(model.User).all()
         print(res)

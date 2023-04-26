@@ -15,7 +15,7 @@ class User(Base):
     name = Column(String(30) , nullable=False  , index=True)
     email = Column(String(50)  , nullable=False , unique=True)
     phone_no= Column(Integer , nullable=False , unique=True)
-    
+    password= Column(String , nullable=False , unique=False)
     def __repr__(self) -> str:
         return "UserModel(name=%s email=%s phone=%d)" % (self.name  , self.email , self.phone_no)
 

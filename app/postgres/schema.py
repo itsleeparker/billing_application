@@ -5,9 +5,10 @@ from enum import Enum
 #####################################USER SCHEMA#############################################
 #This will act as the base model to interact with ORM
 class UserBase(BaseModel):
-    name:str
-    phone_no:int
-    email:str
+    name: str
+    phone_no: int
+    email: str
+    password: str
 
 class UserCreate(UserBase):
     pass

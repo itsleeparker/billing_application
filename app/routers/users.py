@@ -77,6 +77,21 @@ async def get_by_phone(req:int , db:Session = Depends(getDb)):
     except:
         raise HTTPException(status_code=404,  detail="Error Occured while fetching")
 
+@router.post("/login" , response_model=schema.User)
+async def get_login(req:schema.User  , db:Session = Depends(getDb)):
+    """
+        Logins in the user
+    """
+    try:
+        user = await UserRepo.fetch_by_phone(db=db ,phone_number=req.phone_no)
+        if not user:
+            raise HTTPException(status_code=404 , detail="User Not Found")
+        if not (user.password == req.password):
+            raise HTTPException(status_code=401 , detail="Authentication Failed")
+        return user
+    except Exception as e:
+        raise HTTPException(status_code=502 , detail=f"Somwthing went wrong {e}")
+
 @router.put("/")
 async  def update(body:schema.UserCreate , db:Session=Depends(getDb)):
     try:

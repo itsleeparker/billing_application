@@ -1,14 +1,116 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+	<title>Admin Page</title>
+	<style>
+		/* CSS for the logo and menu bar */
+		#logo {
+			float: right;
+			margin-top: 10px;
+			margin-right: 20px;
+		}
+		#menu {
+      position:absolute;
+			float: left;
+			width: 200px;
+			background-color: #333;
+			color: #fff;
+			padding: 10px;
+			box-sizing: border-box;
+      top:0;
+      bottom:0;
+		}
+		#menu ul {
+			list-style-type: none;
+			padding: 0;
+			margin: 0;
+		}
+		#menu li {
+			margin-bottom: 10px;
+		}
+		#menu a {
+			color: #fff;
+			text-decoration: none;
+		}
+		#menu a:hover {
+			text-decoration: underline;
+		}
+
+		/* CSS for the middle section */
+		#middle {
+			margin: 10px 0 0 200px ;
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-evenly;
+      height:98vh;
+      overflow:scroll;
+		}
+    #middle::-webkit-scrollbar {
+      display: none;
+    }
+		.card {
+			width: 300px;
+			height: 400px;
+			background-color: #eee;
+			margin: 10px;
+			padding: 10px;
+			box-sizing: border-box;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+		.card-title {
+			font-size: 24px;
+			font-weight: bold;
+			margin: 10px 0;
+		}
+		.card-image {
+			width: 200px;
+			height: 200px;
+			background-color: #ccc;
+			margin-bottom: 10px;
+		}
+	</style>
 </head>
 <body>
-    <h1>
-        This is home page
-    </h1>
+	<div id="logo">
+		<img src="logo.png" alt="Profile Logo">
+	</div>
+	<div id="menu">
+    <h1>The Bill App</h1>
+		<ul>
+			<li><a href="#">Home</a></li>
+			<li><a href="#">Create New</a></li>
+			<li><a href="#">Search</a></li>
+			<li><a href="#">Logout</a></li>
+		</ul>
+	</div>
+	<div id="middle">
+		<div class="card">
+			<div class="card-title">Card 1</div>
+			<div class="card-image"></div>
+		</div>
+		<div class="card">
+			<div class="card-title">Card 2</div>
+			<div class="card-image"></div>
+		</div>
+		<div class="card">
+			<div class="card-title">Card 3</div>
+			<div class="card-image"></div>
+		</div>
+		<div class="card">
+			<div class="card-title">Card 4</div>
+			<div class="card-image"></div>
+		</div>
+		<div class="card">
+			<div class="card-title">Card 5</div>
+			<div class="card-image"></div>
+		</div>
+		<div class="card">
+			<div class="card-title">Card 6</div>
+			<div class="card-image"></div>
+		</div>
+	</div>
+	<script src="dist/bundel.js"></script>
 </body>
 </html>
